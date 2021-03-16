@@ -28,3 +28,4 @@
   
   </tr>
 </table>
+![image of our souvenir](/幸运字符的纪念.png)
