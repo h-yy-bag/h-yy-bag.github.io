@@ -24,7 +24,7 @@
 <table border="0">
   <tr>
     
-      <img src="/幸运字符的纪念.jpg"  width ="75%">
+      <img src="/幸运字符的纪念.png"  width ="75%">
   
   </tr>
 </table>
