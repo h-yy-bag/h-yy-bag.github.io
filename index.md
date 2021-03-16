@@ -27,5 +27,6 @@
       <img src="/幸运字符的纪念.png"  width ="75%">
   
   </tr>
-</table>
+</table>  
+
 ![image of our souvenir](/幸运字符的纪念.png)
