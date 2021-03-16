@@ -23,7 +23,8 @@
 - 今天是第二个幸运字符的第一次点亮(小纪念)（哈哈哈）：
 <table border="0">
   <tr>
-  <img src="/幸运字符的纪念.jpg" width ="75%">
+    
+      <img src="/幸运字符的纪念.jpg"  width ="75%">
   
   </tr>
 </table>
