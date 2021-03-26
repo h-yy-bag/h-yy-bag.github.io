@@ -30,4 +30,9 @@
 >3月25号：（22:43）
 我学会了插入表情（哈哈哈):smile:   
 我会不定时更新的（虽然写的可能只是自己的一些不太重要的话），有时候想说话的，但是却又说不出（感觉自己挺可笑的):joy:
-- - - - -
+- - - - -  
+<img src="/图像1.jpg" height="30%" width="30%" /><img src="/图像2.jpg" height="30%" width="30%" /><img src="/图像3.jpg" height="30%" width="30%" />
+<center> 
+<img src="/图像1.jpg" width="25%" height="25%" /> 
+Figure 1(这是我偷偷地搬运过来的) 
+</center>
