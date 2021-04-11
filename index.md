@@ -1,7 +1,7 @@
 <table border="0">
   <tr>
     
-      <img src="/头像.jpg" width="60%">      
+      <img src="/头像.jpg" height="30%" width="30%">      
    
   </tr>
 </table>
@@ -20,8 +20,8 @@
 - （不是我不想说其他的话，是因为我只想出了这一句话）
 - （我把这个小页面当作是我们认识到现在的一种小纪念）
 2021年3月16日：
-- 今天是第二个幸运字符的第一次点亮(小纪念)（哈哈哈）：
-![image of our souvenir](/幸运字符的纪念.png)
+- 今天是第二个幸运字符的第一次点亮(小纪念)（哈哈哈):  
+![image of our souvenir](/幸运字符的纪念.png)  
 -------  
 >今天是3月18号，今晚就会出来去大学城的志愿者的名单，如果出来了的话，我就会去大学城了  
 >不过你昨晚说会带我去玩，我其实很愿意的，但是我又有点害怕，不敢和你一起玩（因为我一直以来都不会和女同学玩耍，不知道要怎么玩，也不知道要怎么去找到一个彼此都感到有兴趣的东西， 同时呢，也是第一次见面，我也不知道要怎么办，所以我可能会选择回避掉见面的机会）  
@@ -59,16 +59,3 @@
 >***爱在左，同情在右，走在生命的两旁，随时撒种，随时开花，将这一径长途，点缀得香花弥漫，使穿枝拂叶的行人，踏着荆棘，不觉得痛苦，有泪可落，却不是悲凉***
      ----冰心  
 [一言](https://v1.hitokoto.cn/)  
-<script>
-  var xhr = new XMLHttpRequest();
-  xhr.open('get', 'https://v1.hitokoto.cn');
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      var data = JSON.parse(xhr.responseText);
-      var hitokoto = document.getElementById('hitokoto_text');
-      hitokoto.href = 'https://hitokoto.cn/?uuid='+ data.uuid
-      hitokoto.innerText = data.hitokoto;
-    }
-  }
-  xhr.send();
-</script>
