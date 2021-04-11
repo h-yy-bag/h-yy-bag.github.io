@@ -1,7 +1,7 @@
 <table border="0">
   <tr>
     
-      <img src="/头像.jpg" width="100%">      
+      <img src="/头像.jpg" width="60%">      
    
   </tr>
 </table>
