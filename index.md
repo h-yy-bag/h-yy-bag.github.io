@@ -58,5 +58,17 @@
 >***当人们做不到一些事情的时候，他们会对你说你也同样不能***             ----当幸福来敲门  
 >***爱在左，同情在右，走在生命的两旁，随时撒种，随时开花，将这一径长途，点缀得香花弥漫，使穿枝拂叶的行人，踏着荆棘，不觉得痛苦，有泪可落，却不是悲凉***
      ----冰心  
-！[一言](https://v1.hitokoto.cn/)  
-<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+![一言](https://v1.hitokoto.cn/)  
+<script>
+  var xhr = new XMLHttpRequest();
+  xhr.open('get', 'https://v1.hitokoto.cn');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      var data = JSON.parse(xhr.responseText);
+      var hitokoto = document.getElementById('hitokoto_text');
+      hitokoto.href = 'https://hitokoto.cn/?uuid='+ data.uuid
+      hitokoto.innerText = data.hitokoto;
+    }
+  }
+  xhr.send();
+</script>
