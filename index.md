@@ -60,6 +60,7 @@
 >***爱在左，同情在右，走在生命的两旁，随时撒种，随时开花，将这一径长途，点缀得香花弥漫，使穿枝拂叶的行人，踏着荆棘，不觉得痛苦，有泪可落，却不是悲凉***
      </br>　　　　　　　　　　　　　　　　　　——————冰心  
 >***春风得意马蹄疾，一日看尽长安花***                </br>  　　　　　　　　　　　　　　　　　————————《登科后》  
->***Life was like box of chocolates, you never know what you're gonna get***            </br>　　　　　　　　　　　　　　　　—————————— **Forrest Gump**  
+>***Life was like box of chocolates, you never know what you're gonna get***            </br>　　　　　　　　　　　　　　　—————————— **Forrest Gump**  
 >***一个人有两个我，一个在黑暗中醒着，一个在光明中睡着***   </br> 　　　　　　　　　　　　　　　　　　　　　　————————纪伯伦  
+>***一个知识越贫乏的人，越是拥有一种莫明奇怪的勇气和自豪感，因为知识越贫乏，你所相信的东西就越绝对，你根本没有听过与此相对立的观点***</br>　　　　　　　　　　　　　　　——————————罗翔  
 [一言](https://v1.hitokoto.cn/)  
