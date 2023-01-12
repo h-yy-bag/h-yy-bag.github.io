@@ -126,7 +126,7 @@ redefine-tablet()
   cursor: zoom-in;
   display: block;
   box-shadow: 0 0 2px var(--shadow-color);
-  margin: 10px auto 2px;
+  margin: 10px 0 2px;
 }
 .markdown-body > table {
   border-spacing: 0;
