@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-15T08:56:01.213Z</updated>
+  <updated>2023-01-24T15:59:52.914Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通原笔记_1（1至2章）</title>
+    <link href="http://example.com/2023/01/24/%E9%80%9A%E5%8E%9F%E7%AC%94%E8%AE%B0-1/"/>
+    <id>http://example.com/2023/01/24/%E9%80%9A%E5%8E%9F%E7%AC%94%E8%AE%B0-1/</id>
+    <published>2023-01-24T15:42:26.000Z</published>
+    <updated>2023-01-24T15:59:52.914Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​最近愈发觉得在蹉跎时间，也稍微把游戏放一放，现在更能感受到人的“温度”，而不是打完游戏之后的一身虚无以及疲惫、无知。</p><p>选择<a class="link"   href="https://www.bilibili.com/video/BV1nE411E79G" >西安电子科技大学通信原理<i class="fa-solid fa-up-right-from-square"></i></a>观看，也把之前很多不懂的地方重新认识了一遍，借此文来记录笔记。</p><p><strong>第一章</strong></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242349288.jpg"                      alt="CRall_20230124_153838990"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242351621.jpg"                      alt="CRall_20230124_153849867"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242352676.jpg"                      alt="CRall_20230124_153911365"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242353578.jpg"                      alt="CRall_20230124_153920542"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242354211.jpg"                      alt="CRall_20230124_153932721"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242354575.jpg"                      alt="CRall_20230124_153942022"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242355731.jpg"                      alt="CRall_20230124_153950281"                ></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202301242357435.jpg"                      alt="CRall_20230124_153959523"                ></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="通信原理 笔记" scheme="http://example.com/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86-%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>初晴</title>
