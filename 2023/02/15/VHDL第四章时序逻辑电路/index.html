@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="一语">
+    
+    <title>
+        
+            VHDL第四章时序逻辑电路 |
+        
+        Lady Shen
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/css/regular.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/css2.css">
+
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"left","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_block":{"copy":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.4.6","friend_links":{"columns":2}};
+    REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="My Lady Shen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+    
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Lady Shen
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <!-- Menu -->
+                            <a class="" 
+                                href="/" >
+                                
+                                    
+                                        <i class="fa-regular fa-house"></i>
+                                    
+                                    首页
+                                
+                            </a>
+                            <!-- Submenu -->
+                            
+                        </li>
+                    
+                        <li class="menu-item">
+                            <!-- Menu -->
+                            <a class="" 
+                                href="/archives" >
+                                
+                                    
+                                        <i class="fa-regular fa-archive"></i>
+                                    
+                                    归档
+                                
+                            </a>
+                            <!-- Submenu -->
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="" 
+                       href="/" >
+                         
+                            
+                                <i class="fa-regular fa-house"></i>
+                            
+                            首页
+                        
+                    </a>
+                </li>
+                <!-- Submenu -->
+                
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="" 
+                       href="/archives" >
+                         
+                            
+                                <i class="fa-regular fa-archive"></i>
+                            
+                            归档
+                        
+                    </a>
+                </li>
+                <!-- Submenu -->
+                
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第四章时序逻辑电路</h1></span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">一语</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2023-02-15 16:35:50</span>
+        <span class="mobile">2023-02-15 16:35</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/VHDL-%E5%AD%A6%E4%B9%A0/">VHDL 学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>输出不仅与当前输入有关，还与原始状态有关</p>
+<p>组合逻辑电路+ <strong>存储电路</strong>（包含有 触发器，寄存器等）</p>
+<ol>
+<li>锁存器</li>
+<li>触发器</li>
+<li>寄存器</li>
+<li>计数器</li>
+<li>乘法器<br>时序电路引进了 现态和次态的概念<br>可以使用逻辑表达式来进行描述</li>
+</ol>
+<p>#分类</p>
+<ul>
+<li>按照触发器（动作特点）<blockquote>
+<pre><code>同步时序逻辑电路，同一个时钟信号。
+
+异步时序逻辑电路，没有统一的时钟脉冲信号，触发器的变化有前有后。
+</code></pre>
+</blockquote>
+</li>
+</ul>
+<p>按照输出信号的特点</p>
+<blockquote>
+<pre><code>米丽（Mealy）输入状态不仅与存储电路状态Q有关，并且与外部输入X有关。
+摩尔（Moore）输出状态仅与存储电路的状态Q有关 无关输入X。
+</code></pre>
+</blockquote>
+<h1 id="时序逻辑电路——锁存器"><a href="#时序逻辑电路——锁存器" class="headerlink" title="时序逻辑电路——锁存器"></a>时序逻辑电路——<strong>锁存器</strong></h1><ul>
+<li>RS锁存器<br>根据真值表来进行判断<table>
+<thead>
+<tr>
+<th align="center">S</th>
+<th align="center">R</th>
+<th align="center">Q</th>
+<th align="center">~Q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">Q</td>
+<td align="center">~Q</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Library</span>  ieee;</span><br><span class="line"><span class="keyword">Use</span>  ieee.std_logic_1164.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">Entity</span>  SR_latch2  <span class="keyword">is</span> </span><br><span class="line">    <span class="keyword">port</span> ( S, R: <span class="keyword">in</span>  <span class="built_in">std_logic</span> ;</span><br><span class="line">             Q, Qbar :<span class="keyword">out</span>  <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">End</span>  SR_latch2;</span><br><span class="line"><span class="keyword">Architecture</span>  behav  <span class="keyword">of</span>   R_latch2  <span class="keyword">is</span></span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line"> <span class="keyword">process</span> ( R , S ) <span class="keyword">is</span></span><br><span class="line">      <span class="keyword">variable</span> rs: <span class="built_in">std_logic_vector</span>(<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line">      rs:=R&amp;S;</span><br><span class="line">      <span class="keyword">case</span> rs <span class="keyword">is</span></span><br><span class="line">          <span class="keyword">when</span> <span class="string">&quot;00&quot;</span> =&gt; Q&lt;=<span class="string">&#x27;1&#x27;</span>; Qbar&lt;=<span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">          <span class="keyword">when</span> <span class="string">&quot;01&quot;</span> =&gt; Q&lt;=<span class="string">&#x27;1&#x27;</span>; Qbar&lt;=<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">          <span class="keyword">when</span> <span class="string">&quot;10&quot;</span> =&gt; Q&lt;=<span class="string">&#x27;0&#x27;</span>; Qbar&lt;=<span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">          <span class="keyword">when</span> <span class="keyword">others</span>=&gt;<span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">end</span> <span class="keyword">case</span>;</span><br><span class="line">   <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">end</span> behav;</span><br><span class="line"><span class="comment">--敏感参数有R和S</span></span><br></pre></td></tr></table></figure></div>
+<p>D锁存器<br>D锁存器通过<strong>条件涵盖不完整的if语句</strong> 产生寄存器；<br>#值得一看<br>敏感参数表包含D、Enable，综合后  形成一个电平触发的锁存器</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Library</span>  ieee;</span><br><span class="line"><span class="keyword">Use</span>  ieee.std_logic_1164.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">Entity</span>  D_latch  <span class="keyword">is</span></span><br><span class="line">     <span class="keyword">port</span> ( D, Enable: <span class="keyword">in</span>  <span class="built_in">std_logic</span> ;</span><br><span class="line">               Q: <span class="keyword">out</span>  <span class="built_in">std_logic</span> );</span><br><span class="line"><span class="keyword">End</span>  D_latch;</span><br><span class="line"><span class="keyword">Architecture</span>  behav  <span class="keyword">of</span>   D_latch  <span class="keyword">is</span></span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">      <span class="keyword">process</span>(D, Enable) </span><br><span class="line">      <span class="keyword">begin</span></span><br><span class="line">           <span class="keyword">if</span> (Enable=‘<span class="number">1</span>’) <span class="keyword">then</span>  Q&lt;=D;</span><br><span class="line">           <span class="keyword">end</span>  <span class="keyword">if</span>;</span><br><span class="line">      <span class="keyword">end</span>  <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span>  behav;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器是指<strong>边沿触发</strong>的寄存器，常见的有<strong>D型，JK型，T型</strong>。在描述触发器前要注意时钟上升沿的描述</p>
+<h2 id="D触发器"><a href="#D触发器" class="headerlink" title="D触发器"></a>D触发器</h2><p>一个D 一个Clock<br>输出一个Q</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> ieee;</span><br><span class="line"><span class="keyword">use</span> ieee.std_logic_1164.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">entity</span> d_ff1 <span class="keyword">is</span></span><br><span class="line">	<span class="keyword">port</span>(D,clk: <span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">		Q:<span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">end</span> d_ff1;</span><br><span class="line"><span class="keyword">architecture</span> behav <span class="keyword">of</span> d_ff1 <span class="keyword">is</span></span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line">	<span class="keyword">process</span>(clk)</span><br><span class="line">	<span class="keyword">begin</span> </span><br><span class="line">		<span class="keyword">if</span>(clk&#x27; event <span class="keyword">and</span> clk = <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">		<span class="keyword">then</span> Q&lt;=D;</span><br><span class="line">		<span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">end</span> behav;</span><br><span class="line"><span class="comment">---第二种方式</span></span><br><span class="line">	<span class="keyword">process</span></span><br><span class="line">       <span class="keyword">begin</span> </span><br><span class="line">             <span class="keyword">wait</span> <span class="keyword">until</span> (clk=‘<span class="number">1</span>’) ;  </span><br><span class="line"><span class="comment">--等同于 wait until clk’event and clk=‘1’；</span></span><br><span class="line">             Q&lt;=D;</span><br><span class="line">       <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span> behav;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>时钟边沿检测到的方法 #值得一看 </p>
+<blockquote>
+<ol>
+<li>上升沿：clock’  event and clock&#x3D;‘1’<br>下降沿：clock’  event and clock&#x3D;‘0’;<ol start="2">
+<li>利用WAIT语句启动进程，检测colck的上升沿</li>
+<li>Process 和 if语句的相结合  利用clk启动进程，并进行判断</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h2 id="带Q非的D触发器"><a href="#带Q非的D触发器" class="headerlink" title="带Q非的D触发器"></a>带Q非的D触发器</h2><p>不是简单的按照前面直接加上一个Qbar<br>如<code>Qbar = NOT D</code><br>时钟上升沿会有两个赋值，导致有两个D触发器</p>
+<p>解决方式</p>
+<ol>
+<li><p>信号法：</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">architecture</span> sig <span class="keyword">of</span> D_ff <span class="keyword">is</span></span><br><span class="line">	<span class="keyword">signal</span> state: <span class="built_in">std_logic</span>;</span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line">	<span class="keyword">process</span>(clock, reset)</span><br><span class="line">	<span class="keyword">begin</span> </span><br><span class="line">		<span class="keyword">if</span>(reset=<span class="string">&#x27;0&#x27;</span>)<span class="keyword">then</span> </span><br><span class="line">			state&lt;=<span class="string">&#x27;0&#x27;</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span> rising_edge(clock)</span><br><span class="line">		<span class="keyword">then</span> state&lt;=D;</span><br><span class="line">		<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line">	Q&lt;=state;</span><br><span class="line">	Qbar&lt;=<span class="keyword">not</span> state;</span><br><span class="line"><span class="keyword">end</span> sig;</span><br><span class="line"><span class="comment">--利用信号作为中间变量，D触发器</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>变量法：</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Architecture</span> var <span class="keyword">of</span> D_FF <span class="keyword">is</span> </span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">     <span class="keyword">process</span>(clock, reset)</span><br><span class="line">         <span class="keyword">variable</span> state: <span class="built_in">std_logic</span> ;</span><br><span class="line">     <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span> (reset=‘<span class="number">0</span>’) <span class="keyword">then</span>  state:=‘<span class="number">0</span>’;</span><br><span class="line">         <span class="keyword">elsif</span> rising_edge(clock)</span><br><span class="line">         <span class="keyword">then</span> state:=D;</span><br><span class="line">         <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">         Q&lt;=state;</span><br><span class="line">         Qbar&lt;=<span class="keyword">not</span> state;</span><br><span class="line">      <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span> var;</span><br><span class="line"><span class="comment">--跟变量法相似，只是state的范围限定在process内</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<h2 id="JK触发器"><a href="#JK触发器" class="headerlink" title="JK触发器"></a>JK触发器</h2><p>四个输入J K R（reset） Clock </p>
+<p>两个输出 Q Qbar</p>
+<table>
+<thead>
+<tr>
+<th>J</th>
+<th>K</th>
+<th align="center">Q</th>
+<th>Qbar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td align="center">Q</td>
+<td>Qbar</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td align="center">0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td align="center">1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td align="center">Qbar</td>
+<td>Q</td>
+</tr>
+</tbody></table>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">entity</span> JK_ff <span class="keyword">is</span></span><br><span class="line">	<span class="keyword">port</span>(J,K: <span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">		clock,reset: <span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">		Q, Qbar: <span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">end</span> JK_ff;</span><br><span class="line"><span class="keyword">architecture</span> behav <span class="keyword">of</span> JK_ff <span class="keyword">is</span></span><br><span class="line"><span class="keyword">signal</span> state:<span class="built_in">std_logic</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">process</span>( clock, reset) <span class="keyword">is</span></span><br><span class="line">     <span class="keyword">variable</span> jk: <span class="built_in">std_logic_vector</span>(<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>); </span><br><span class="line">      <span class="keyword">begin</span></span><br><span class="line">           jk:=J&amp;K;</span><br><span class="line">           <span class="keyword">if</span>  (reset=‘<span class="number">0</span>’) <span class="keyword">then</span> state&lt;=‘<span class="number">0</span>’;</span><br><span class="line">            <span class="keyword">elsif</span>  rising_edge(clock) <span class="keyword">then</span></span><br><span class="line">		        <span class="keyword">case</span> jk <span class="keyword">is</span></span><br><span class="line">			        <span class="keyword">when</span> “<span class="number">11</span>”=&gt; state&lt;=<span class="keyword">not</span> state;</span><br><span class="line">			        <span class="keyword">when</span> “<span class="number">10</span>”=&gt; state&lt;=‘<span class="number">1</span>’;</span><br><span class="line">			        <span class="keyword">when</span> “<span class="number">01</span>”=&gt; state&lt;=‘<span class="number">0</span>’;</span><br><span class="line">			        <span class="keyword">when</span> <span class="keyword">others</span>  =&gt; <span class="keyword">null</span>;  </span><br><span class="line">		        <span class="keyword">end</span> <span class="keyword">case</span>;</span><br><span class="line">			<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line">      Q&lt;=state;</span><br><span class="line">      Qbar&lt;=<span class="keyword">not</span> state ;</span><br><span class="line"><span class="keyword">end</span>  behav</span><br></pre></td></tr></table></figure></div>
+<p>**CASE语句要完整,所以在CASE JK的时候要加<br>when others &#x3D;&gt;null;</p>
+<h2 id="T触发器"><a href="#T触发器" class="headerlink" title="T触发器"></a>T触发器</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151611179.png"
+                      alt="image.png"
+                ></p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Entity</span> T_FF <span class="keyword">is</span></span><br><span class="line">     <span class="keyword">port</span> ( T, clock, reset : <span class="keyword">in</span>  <span class="built_in">std_logic</span> ;</span><br><span class="line">               Q, Qbar : <span class="keyword">out</span>  <span class="built_in">std_logic</span> );</span><br><span class="line"><span class="keyword">End</span> T_FF;</span><br><span class="line"><span class="keyword">Architecture</span>  behav  <span class="keyword">of</span>   T_FF  <span class="keyword">is</span></span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">      <span class="keyword">process</span>(clock, reset)</span><br><span class="line">           <span class="keyword">variable</span>  state:  <span class="built_in">std_logic</span> ;     </span><br><span class="line">      <span class="keyword">begin</span> </span><br><span class="line">          <span class="keyword">if</span>  (reset =‘<span class="number">0</span>’)  <span class="keyword">then</span> state:=‘<span class="number">0</span>’;</span><br><span class="line">          <span class="keyword">elsif</span>  rising_edge(clock) <span class="keyword">then</span></span><br><span class="line">               <span class="keyword">if</span>   T=‘<span class="number">1</span>’<span class="keyword">then</span> </span><br><span class="line">                     state := <span class="keyword">not</span> state;</span><br><span class="line">                <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">            <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line">            Q&lt;=state;</span><br><span class="line">            Qbar&lt;= <span class="keyword">not</span> state;</span><br><span class="line">       <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span>  behav ; </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="寄存器的设计"><a href="#寄存器的设计" class="headerlink" title="寄存器的设计"></a>寄存器的设计</h1><p>一个D触发器就是一个寄存器，多位可以由多个D触发器构成</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Entity</span> reg  <span class="keyword">is</span></span><br><span class="line">      <span class="keyword">generic</span>( n: <span class="built_in">natural</span> :=<span class="number">4</span> );                            <span class="comment">--实体类属中的常数</span></span><br><span class="line">        <span class="keyword">port</span> (  D: <span class="keyword">in</span> <span class="built_in">std_logic_vector</span>(n-<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line">                 clock, reset : <span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">                 Q: <span class="keyword">out</span> <span class="built_in">std_logic_vector</span> (n-<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>) );</span><br><span class="line"><span class="keyword">End</span> reg ;</span><br><span class="line"><span class="keyword">Architecture</span> behav <span class="keyword">of</span> reg <span class="keyword">is</span></span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">     <span class="keyword">process</span>(clock, reset)</span><br><span class="line">     <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span> (reset=‘<span class="number">0</span>’)  <span class="keyword">then</span> Q&lt;=( <span class="keyword">others</span>=&gt;‘<span class="number">0</span>’);       <span class="comment">--表示Q赋全‘0’  </span></span><br><span class="line">         <span class="keyword">elsif</span> rising_edge(clock) <span class="keyword">then</span> </span><br><span class="line">             Q&lt;=D;</span><br><span class="line">         <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">       <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span>  behav ;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="移位寄存器"><a href="#移位寄存器" class="headerlink" title="移位寄存器"></a>移位寄存器</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151614295.png"
+                      alt="image.png"
+                ></p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Entity</span>   sipo <span class="keyword">is</span></span><br><span class="line">       <span class="keyword">generic</span>( n : <span class="built_in">natural</span> :=<span class="number">8</span>);</span><br><span class="line">       <span class="keyword">port</span> ( a : <span class="keyword">in</span> <span class="built_in">std_logic</span> ;</span><br><span class="line">                 q: <span class="keyword">out</span> <span class="built_in">std_logic_vector</span>(n-<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line">                 clk : <span class="keyword">in</span> <span class="built_in">std_logic</span> );</span><br><span class="line"><span class="keyword">End</span> sipo;</span><br><span class="line"><span class="keyword">Architecture</span> behav <span class="keyword">of</span> sipo <span class="keyword">is</span></span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">    <span class="keyword">process</span>(clk)</span><br><span class="line">        <span class="keyword">variable</span> reg : <span class="built_in">std_logic_vector</span>(n-<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line">     <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">if</span>  rising_edge(clk)  <span class="keyword">then</span></span><br><span class="line">              reg : = reg ( n-<span class="number">2</span> <span class="keyword">downto</span> <span class="number">0</span>) &amp; a ;   </span><br><span class="line">              <span class="comment">--左移移位寄存器；</span></span><br><span class="line">   <span class="comment">-- reg : = a &amp; reg (n-1 downto 1); 右移移位寄存器 </span></span><br><span class="line">          <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line">          q&lt;= reg ;</span><br><span class="line">    <span class="keyword">end</span>  <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">End</span>  behav;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151618066.png"
+                     
+                ><br>用“+”函数描述</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Library</span> ieee ;</span><br><span class="line"><span class="keyword">Use</span> ieee.std_logic_1164.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">Use</span> ieee.std_logic_unsigned.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">Entity</span> counter <span class="keyword">is</span> </span><br><span class="line">     <span class="keyword">generic</span>( n: <span class="built_in">natural</span> :=<span class="number">4</span>);</span><br><span class="line">     <span class="keyword">port</span> ( clk : <span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">               reset : <span class="keyword">in</span> <span class="built_in">std_logic</span> ;</span><br><span class="line">               count : <span class="keyword">out</span> <span class="built_in">std_logic_vector</span>(n-<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>) );</span><br><span class="line"><span class="keyword">End</span> counter;</span><br><span class="line"><span class="keyword">architecture</span> ripple <span class="keyword">of</span> counter <span class="keyword">is</span> </span><br><span class="line">        <span class="keyword">component</span> T_FF <span class="keyword">is</span> </span><br><span class="line">            <span class="keyword">port</span>( T: <span class="keyword">in</span> <span class="built_in">std_logic</span> ;</span><br><span class="line">                     clk:<span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">			      reset:<span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">                    Q : <span class="keyword">out</span> <span class="built_in">std_logic</span>;</span><br><span class="line">				    Qbar:<span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">component</span> ;                     <span class="comment">--将前面描述好的T触发器定义为元件；</span></span><br><span class="line">        <span class="keyword">signal</span> carry: <span class="built_in">std_logic_vector</span>( n <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line"><span class="keyword">Begin</span></span><br><span class="line">       carry(<span class="number">0</span>)&lt;=clk;</span><br><span class="line">       g0: <span class="keyword">for</span>  i <span class="keyword">in</span> <span class="number">0</span>  <span class="keyword">to</span> n-<span class="number">1</span>  <span class="keyword">generate</span>      <span class="comment">--循环</span></span><br><span class="line">             T1: T_FF <span class="keyword">port</span> <span class="keyword">map</span> ( ‘<span class="number">1</span>’, carry( i ), reset, count( i ), carry( i+<span class="number">1</span> ) );</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">generate</span> g0;</span><br><span class="line"><span class="keyword">End</span> ripple ;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151627535.png"
+                      alt="image.png"
+                ></p>
+<p>波形仿真：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151628781.png"
+                      alt="image.png"
+                ></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302151630092.png"
+                      alt="image.png"
+                ></p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：VHDL第四章时序逻辑电路</li>
+        <li>本文作者：一语</li>
+        <li>创建时间：2023-02-15 16:35:50</li>
+        <li>
+            本文链接：h-yy-bag.github.io/2023/02/15/VHDL第四章时序逻辑电路/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/VHDL-%E5%AD%A6%E4%B9%A0/">#VHDL 学习</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/15/VHDL%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">VHDL第三章组合逻辑电路</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF%E2%80%94%E2%80%94%E9%94%81%E5%AD%98%E5%99%A8"><span class="nav-text">时序逻辑电路——锁存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-text">D触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A6Q%E9%9D%9E%E7%9A%84D%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-text">带Q非的D触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JK%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-text">JK触发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#T%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-text">T触发器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">寄存器的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-text">移位寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-text">计数器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;<i class="fa-solid fa-heart icon-animate"></i>&nbsp;<a href="/">一语. 版权所有.</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v0.4.6</a>
+        </div>
+        
+        
+        <script async data-pjax defer>
+            function odometer_init(){
+                    let el = document.getElementsByClassName('odometer');
+                    for (i = 0; i < el.length; i++) {
+                        od = new Odometer({
+                            el: el[i],
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    }
+            }
+            odometer_init();
+        </script>
+        <div id="start_time_div" style="display:none">
+            2022/8/17 11:45:14
+        </div>
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fa-solid fa-left-right"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fa-solid fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fa-solid fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fa-solid fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/runtime.js"></script>
+
+    
+<script src="/js/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/css/odometer-theme-minimal.css">
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
