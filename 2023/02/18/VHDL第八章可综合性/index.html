@@ -9,7 +9,7 @@
     
     <title>
         
-            VHDL第七章综合 |
+            VHDL第八章可综合性 |
         
         Lady Shen
     </title>
@@ -185,7 +185,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第七章综合</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第八章可综合性</h1></span>
             </div>
 
             
@@ -204,8 +204,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2023-02-17 00:57:48</span>
-        <span class="mobile">2023-02-17 00:57</span>
+        <span class="pc">2023-02-18 10:17:49</span>
+        <span class="mobile">2023-02-18 10:17</span>
     </span>
     
     
@@ -237,148 +237,141 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="综合的层次"><a href="#综合的层次" class="headerlink" title="综合的层次"></a>综合的层次</h1><p>针对一个给定的设计，根据设计应实现的功能与相应的约束条件，通过计算机的优化处理，获得一个满足要求的设计方案，这个过程就称为 <strong>综合</strong>。</p>
-<p>其中综合具有多个层次，从高到低可以分为</p>
+                <h1 id="VHDL-语言结构向硬件的映射"><a href="#VHDL-语言结构向硬件的映射" class="headerlink" title="VHDL 语言结构向硬件的映射"></a>VHDL 语言结构向硬件的映射</h1><p>有效的VHDL建模风格是控制综合结果最为有力的手段。<br>不同综合工具对于同样的硬件描述，会得到不同的综合结果。</p>
+<p>VHDL中并不是将所有语句综合，综合的是其中的一部分语句。</p>
 <ol>
-<li>算法层</li>
-<li>寄存器传输层</li>
-<li>逻辑层</li>
-<li>电路层</li>
-<li>版图层</li>
+<li>延时描述（after 语句、wait for语句）<strong>将被忽略</strong><br>而综合时间约束则在综合过程中通过综合命令输入。</li>
+<li><strong>支持有限类型</strong><br>有些类型不具备硬件对应物，不可能被综合，如文件类型。<br>通常可综合类型包括位、位矢量、布尔量、整数、枚举类型、数组等。其余像浮点数类型、记录类型等只能得到有限支持，而<strong>时间类型等完全不能被综合</strong></li>
+<li>进程的书写要服从一定的限制<br>在仿真时，VHDL进程可以任意书写。而在综合时，通常要求一个进程内只能有<strong>一个有效时钟</strong>，有的工具还有进一步的限制</li>
+<li>可综合代码应该是同步式的设计<br>推荐使用同步，当然也能使用异步设计，但往往需要进一步的优化或调整。</li>
 </ol>
-<p><strong>三个大的层次</strong>：<br>高层次综合、逻辑综合、版图综合<br><img  
+<h1 id="VHDL类型"><a href="#VHDL类型" class="headerlink" title="VHDL类型"></a>VHDL类型</h1><p>VHDL中包括的对象有： 常量（constant）、信号（signal）、变量（variable），都必须定义为某种具体的类型。</p>
+<ol>
+<li>可综合数据类型<br> 面向综合的建模都支持这样一些类型：枚举类型、整数、一维数组。<br>比较先进的综合工具现在一般也可以处理二维数组和简单的记录类型。</li>
+</ol>
+<p>（1）枚举类型<br>     枚举类型通过列出所有可能的取值来定义，例如：<br>         type  Boolean  is  (FALSE , TRUE);<br>          type  State_type  is  (HALT,READY,RUN,ERROR);<br>          type  Std_ulogic  is  (‘U’,‘X’,‘0’, ‘1’, ‘Z’, ‘-’);</p>
+<pre><code>以上Std_ulogic的定义实际是对‘0’‘1’等字符进行了重载，由于这个定义已经成为IEEE标准，因此综合时不会产生额外硬件。而对于抽象层次更高的Boolean和 State_type则需要进行状态编码。
+一般来说，状态编码是把状态值编码为位矢量（如bit_vector），矢量长度是能够表示所有状态的最短位宽。
+例如，State_type的4个状态值可以分别校编码为“00”，“01”，“10”和“11”。
+</code></pre>
+<p>（2）整数类型<br>    可综合的整数类型定义总是有界的，例如：<br>    type  My_integer  is  Integer  range 0 to 255;<br>    subtype  Byte_int  is  Integer  range -128 to 127;</p>
+<pre><code>对整数类型进行综合时，综合工具首先将其翻译为位矢量，矢量长度仍取能够满足需要的最短位宽。
+建议类型定义时明确指出整数的范围，以便于综合工具进行优化。否则大部分综合工具按32位处理。
+综合后的电路中，整数以矢量形式出现，但通常只能以整个矢量为单位访问，即不能单独访问每一位。
+</code></pre>
+<p>（3）数组类型<br>    现在的综合工具都能够处理一维数组，例如：<br>    type  Word  is  arry  （31 downto 0)  of   Bit;<br>        type  My_RAM  is  array  (1023 downto  0 )   of   Word;</p>
+<pre><code>    对于Word类型，综合工具通常将其综合为总线。 My_RAM类型实际是二维的，这种用两个一维数组代替一个两维数组是常用的综合建模技巧。现在先进的综合工具如synospys DC可以将其综合为RAM，一般的综合工具至少可以把它综合为寄存器
+</code></pre>
+<p>（4）记录类型<br>    记录类型在定义复杂数据类型时非常方便，能够把不同数据类型的数据组织在一起统一访问。<br>    但是，EDA工业界对综合工具是否应该支持记录类型还没有统一意见，因此大多数综合工具不提供这种能力或只能把组合了简单数据类型的记录进行综合。</p>
+<ol start="2">
+<li>可综合子集<br> ieee颁发的<strong>std_logic_1164</strong>，其中定义了<strong>9值数据类型</strong> std_ulogic<br>  ieee颁布的标准<br>   该项标准主要支持以下类型的综合：<br>a) bit ,  boolean , bit_vector<br>b) character , string<br>c) integer<br>d) std_logic , std_ulogic_vector , std_logic ,<br> std_logic_vector<br>e) signed , unsignd</li>
+</ol>
+<h1 id="VHDL的对象"><a href="#VHDL的对象" class="headerlink" title="VHDL的对象"></a>VHDL的对象</h1><p>常量 变量 信号</p>
+<ol>
+<li>常量<br>常量只被计算一次，通过常量引导综合器获得优化结果</li>
+</ol>
+<ol>
+<li><p><strong>用于真值表、ROM等，或者用于信号赋值</strong>，在综合时会形成相应的硬件</p>
+</li>
+<li><p>作为算数运算的一个<strong>操作数</strong>出现，会有特定的优化措施，与硬件不会意义对应。</p>
+</li>
+<li><p><strong>常量在作为条件表达式</strong>的一部分时综合工具会对整个语法结构进行布尔优化。</p>
+</li>
+<li><p><strong>常量传播</strong>。在下面的VHDL代码中，由于数组ROM和ROM（5）的索引都是常量，因此WORD4实际上也成为常数，在进一步优化中，WORD4将作为常量被处理。这就是常量传播。</p>
+<pre><code>  constant ROM : ROM_TYPE := Read(“Rom_file.dat”);
+  signal WORD4 : Bit_vector (3 downto 0);
+  begin
+     WORD4 &lt;= ROM(5)
+</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li>变量和信号<br>两者有不同的仿真行为，在综合过程中，会产生不同的结果</li>
+</ol>
+<ol>
+<li><p>一般来说，尽量<strong>使用变量</strong>能够获得比较好的综合结果，因为这样做使得优化的余地较大。但要注意，并不是所有的综合工具都支持变量的综合。</p>
+</li>
+<li><p>使用信号可以较好地<strong>保持综合前后在I&#x2F;O</strong>上的一致性（这时把进程内对信号的读写统称为I&#x2F;O），而且在需要<strong>锁存中间结果</strong>的时候，经常有必要使用信号</p>
+</li>
+</ol>
+<h1 id="初值"><a href="#初值" class="headerlink" title="初值"></a>初值</h1><p>存在三种初值：由<strong>类型或子类型定义可以得到的默认初值</strong>，定义对象时明确指定的初值和进程入口处显示地赋予对象的初值。<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170028496.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171019259.png"
                       alt="image.png"
                 ></p>
-<h1 id="高层次综合"><a href="#高层次综合" class="headerlink" title="高层次综合"></a>高层次综合</h1><p>从<strong>算法级</strong>的行为描述到 <strong>寄存器传输级</strong>的描述<br>输入：硬件描述语言的源描述</p>
-<p>综合结果：一般包括一个 <strong>数据通路</strong>和一个<strong>控制器</strong>。</p>
 <ul>
-<li>数据通路（datapath）: 由寄存器、功能单元、多路器和总线等模块构成对的互连网络，实现数据的传输。</li>
-<li>控制器（controller）: 通常由硬连逻辑（hardwired logic）或固件（firmware）构成，用于控制数据通路中数据的传输。</li>
+<li><p>以上三种初值的前两种只在仿真时有意义,在综合时将被忽略。</p>
+</li>
+<li><p>第三种形式将被综合器处理，形成对应电路</p>
+</li>
+<li><p>在<strong>进程入口处</strong>显示地赋予对象的初值。</p>
+</li>
 </ul>
-<hr>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171021583.png"
+                      alt="image.png"
+                ></p>
+<ol>
+<li>逻辑运算符<br>逻辑运算符包括<strong>二元逻辑运算符以及NOT运算</strong>，操作数可以是bit 和std_logic等类型的标量或同长度的矢量对象，也可以是 boolean类型的对象。这些运算符综合时直接调用逻辑门单元实现即可，但优化过后，可能被合并或改变</li>
+<li>关系运算符<br>没有统一的方法，利用被比较数的特点进行特定优化</li>
+<li>一元算数运算符<br>一元算术运算符有三个，即 **** +（正），一（负）和abs（取绝对值）。*对前两个运算符，综合工具大都可以用组合逻辑线路实现，如下的例子。abs运算符的处理比较复杂，大部分综合工具尚不能提供支持。</li>
+<li>二元算术运算符<br>特别是高层次综合工具,都能直接把加,减,乘运算综合为相应的电路,部分工具也支持除法运算。mod 和rem运算符通常不被综合工具支持。</li>
+</ol>
+<h1 id="顺序语句"><a href="#顺序语句" class="headerlink" title="顺序语句"></a>顺序语句</h1><ol>
+<li>if语句<br> (1)if语句包含了条件所有可能的取值,称之为<strong>完全if语句</strong>。<br>这时综合器用多路选择器或基本逻辑门的组合来实现电路。用多路选择器实现电路时，if…elsif…else中隐含的优先关系会被消去。<br> (2)if语句条件未包含所有可能出现的情况,称之为<strong>不完全if语句</strong><br>此时有效条件是对某信号的跳变进行检测，并且在条件满足时是对信号进行赋值操作，那么会生成触发器。如果赋值号右边为一复杂表达式，则综合器先用组合逻辑电路计算表达式，计算结果送入触发器的数据输入。</li>
+<li>case语句<br>case语句与多路选择器电路的对应关系是显而易见的，但是，建模时要注意<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171032451.png"
+                      alt="image.png"
+                ><br>否则会造成电路的复杂化，甚至导致形成时序电路。</li>
+</ol>
+<p>when others &#x3D;&gt; null;<br>3. 循环语句<br>       VHDL的循环语句有三种：for循环 、while循环,和无限loop…end loop。<br>   有next语句和exit来配合循环语句使用。</p>
+<h1 id="并行语句"><a href="#并行语句" class="headerlink" title="并行语句"></a>并行语句</h1><p>包括进程、并行赋值语句、块语句、生成语句等。</p>
+<ol>
+<li>进程<br> 进程是VHDL中描述硬件行为最为有力的方式。进程内的语句属于顺序语句，而进程本身则属于并行语句。<br> 综合后的电路存在寄存器，则是时序电路。<br> 还存在两种情况：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171037857.png"
+                      alt="image.png"
+                ></li>
+</ol>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170029337.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171038365.png"
                       alt="image.png"
-                ></p>
-<p>作用：</p>
-<ul>
-<li>可以明显地提高设计速度，缩短设计周期，允许设计者寻求最优或满意的设计方案</li>
-<li>可以直接进行数字系统从行为描述到芯片描述的设计工作。 （）</li>
-</ul>
-<h1 id="逻辑综合"><a href="#逻辑综合" class="headerlink" title="逻辑综合"></a>逻辑综合</h1><p>高抽象层次的描述自动地转换成较低抽象层次描述的一种方法。<br>将RTL级的描述转换成<strong>门级网表</strong>的过程。<br>如图<br><img  
+                ><br>2. 信号赋值语句<br>      信号赋值语句的处理是直截了当的，下面:<br>              语句1被综合成一要硬连线；<br>               对于语句2，R将被当作常数处理；<br>              语句3被综合为组合逻辑电路。</p>
+<pre><code>  当然语句1和语句3经过逻辑优化后，可能改变形式或者被消去。
+
+
+      (1)  S &lt;=  A;
+      (2)  R&lt;= ‘1’;
+      (3)  T &lt;= (B xor C) or (D and E) or (F xnor G);
+</code></pre>
+<ol start="3">
+<li>条件和选择赋值<br>VHDL的并行语句有两种方式进行有条件的赋值，即条件赋值<strong>when…else</strong> 和选择赋值<strong>with…select…when</strong>。实际上，这两种语法结构都可以改写为等价的顺序语句。<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170035073.png"
-                     
-                ></p>
-<h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a><strong>约束条件</strong></h2><p>对于数字系统而言，芯片的面积和芯片的速度是综合时最主要考虑</p>
-<ol>
-<li><p>约束的表示：<br> 用于综合的约束可以用用户定义属性来表示。用户定义只是用于给综合工具传递约束信息，仿真时被忽略</p>
-<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">attribute</span>  属性名 ： 数据类型 ；</span><br><span class="line">    <span class="keyword">attribute</span>  属性名  <span class="keyword">of</span>  对象名 ：对象类型  <span class="keyword">is</span>  值</span><br><span class="line"><span class="comment">---------------------------------------</span></span><br><span class="line">	<span class="keyword">Type</span> state <span class="keyword">is</span> ( s0, s1, s2, s3 ); </span><br><span class="line">	<span class="keyword">Attribute</span> enum_encoding <span class="keyword">of</span> state : <span class="keyword">type</span> <span class="keyword">is</span> “<span class="number">00</span>  <span class="number">01</span> <span class="number">11</span> <span class="number">10</span>”; </span><br><span class="line"><span class="comment">--用于确定状态编码，用于有限状态机的描述中</span></span><br><span class="line"><span class="comment">-----------------------------------------</span></span><br><span class="line">	<span class="keyword">Attribute</span> pin_no :<span class="built_in">natural</span> ;</span><br><span class="line">	<span class="keyword">Attribute</span> pin_no <span class="keyword">of</span> q : <span class="keyword">signal</span> <span class="keyword">is</span> <span class="number">42</span> ;   </span><br><span class="line"><span class="comment">--为端口锁定芯片引脚</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-</li>
-<li><p>资源的约束</p>
-<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>   <span class="keyword">select</span>=‘<span class="number">1</span>’  <span class="keyword">then</span>  q&lt;=a+b;</span><br><span class="line">         <span class="keyword">else</span>  q&lt;=c+d;   </span><br><span class="line">     <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-<p>可以用2个加法器和1个二路选择器实现<br>也可以用1个加法器和2个二路选择器完成。</p>
-</li>
-<li><p>时间的约束<br> 假定一个时序系统工作在20MHZ的时钟频率，那么通过状态寄存器和此态产生逻辑的最大延迟不能超过50ns（20MHZ的倒数）</p>
-</li>
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171039047.png"
+                      alt="image.png"
+                ></li>
+<li>元件例化语句<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171054012.png"
+                      alt="image.png"
+                ></li>
+<li>块语句<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171055162.png"
+                      alt="image.png"
+                ></li>
 </ol>
-<hr>
-<h2 id="属性-（好像不太重要）"><a href="#属性-（好像不太重要）" class="headerlink" title="属性 （好像不太重要）"></a>属性 （好像不太重要）</h2><p>用于规定设计所进行的环境，如用属性规定对输出器件必须<strong>驱动的负载</strong>、驱动设计时器件的<strong>驱动能力</strong>和<strong>输入信号的时序</strong>等。</p>
-<ol>
-<li><p>负载属性<br> <img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170044841.png"
-                      alt="image.png"
-                ></p>
-</li>
-<li><p>驱动属性<br>![[Pasted image 20230217004524.png]]</p>
-</li>
-<li><p>到达时间<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170046430.png"
-                      alt="image.png"
-                ></p>
-</li>
-</ol>
-<h1 id="工艺库"><a href="#工艺库" class="headerlink" title="工艺库"></a>工艺库</h1><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170047025.png"
-                      alt="image.png"
-                ><br>多数综合工具都有计算FPGA单元的十分完整的复杂延时模型，它包括固有的上升和下降时间、输出负载与输入级波形斜度延时和估计的引线延时，下图从门输入到输出的<strong>总延时</strong>是：</p>
-<p><u>固有延时＋负载延时＋引线延时＋输入级波形斜度延时</u><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170047247.png"
-                      alt="image.png"
-                ></p>
-<h1 id="RTL描述代码"><a href="#RTL描述代码" class="headerlink" title="RTL描述代码"></a>RTL描述代码</h1><p>又被称为 <strong>数据流描述</strong><br>是一种明确规定寄存器描述的方法。即，是指以规定设计中采用的各种寄存器形式为特征，然后在寄存器之间插入组合逻辑。<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170048738.png"
-                      alt="image.png"
-                ></p>
-<h1 id="逻辑综合器"><a href="#逻辑综合器" class="headerlink" title="逻辑综合器"></a>逻辑综合器</h1><p>从 RTL 转换到 门级描述 有3个步骤：</p>
-<ul>
-<li>把RTL描述转换为未优化的<strong>门级布尔</strong>描述；</li>
-<li>执行布尔优化算法，产生一个优化的<strong>布尔方程描述；</strong></li>
-<li>按目的工艺要求，采用相应的工艺库把优化的布尔等式描述<strong>映射</strong>到<strong>实际逻辑门</strong>。</li>
-</ul>
-<h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><ul>
-<li><p>从RTL描述转换到布尔等式描述通<strong>常并不是由用户控制的</strong>，所产生的中介形式一般为特定优化工具的格式，甚至是不可能由用户可视的。</p>
-</li>
-<li><p>按照这种中介描述，ALL  IF、CASE、LOOP语句、条件信号赋值和选择信号赋值语句转换到它们的布尔表达式，或者<strong>由装配组成触发器和锁存器</strong>,或者由<strong>推论去生成触发器和锁存器。</strong></p>
-</li>
-<li><p>按照其中介的描述这两种情况都能<strong>产生同样的触发器和锁存器</strong></p>
-</li>
-</ul>
-<h1 id="布尔优化"><a href="#布尔优化" class="headerlink" title="布尔优化"></a>布尔优化</h1><ul>
-<li><p>优化过程用大量的算法和规则把一个非优化的布尔的描述转化到优化的布尔描述。</p>
-</li>
-<li><p>转换非优化布尔描述到最低级描述，然后优化那种描述，并尝试用（引入中间变量）共享公共项去减少逻辑门。</p>
-</li>
-<li><p>包括展平设计和提取公因数</p>
-</li>
-</ul>
-<h2 id="展平设计"><a href="#展平设计" class="headerlink" title="展平设计"></a>展平设计</h2><p>转换非优化布尔描述到一种pla格式的过程称为展平设计，即它将所有的逻辑关系都转换成简单的AND和OR的表达式。</p>
-<p>目的：使非优化的布尔描述格式转换成能执行优化算法的布尔描述格式。<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170054716.png"
-                      alt="image.png"
-                ></p>
-<h2 id="提取公因数"><a href="#提取公因数" class="headerlink" title="提取公因数"></a>提取公因数</h2><p>提取公因数是把附加的中间项加到结构描述中的一种过程。展平设计通常会使设计变得非常之大，而且要产生大扇出，展平过程可能比提取公因数的设计在速度上要慢得多<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170054082.png"
-                      alt="image.png"
-                ></p>
-<h1 id="映射到门级"><a href="#映射到门级" class="headerlink" title="映射到门级"></a>映射到门级</h1><ul>
-<li><p>映射过程取出由优化后的布尔描述并利用从工艺库得到的逻辑和定时信息<strong>生成网表</strong>。</p>
-</li>
-<li><p>网表是对用户所需面积和速度目标的体现，有大量的网表，它们在功能上相同但在速度和面积上都在一个很宽的范围上可变</p>
-</li>
-</ul>
-<p>示例：<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170056884.png"
-                      alt="image.png"
-                ></p>
-<h1 id="HDL逻辑综合软件"><a href="#HDL逻辑综合软件" class="headerlink" title="HDL逻辑综合软件"></a>HDL逻辑综合软件</h1><ul>
-<li><p>这类软件将把HDL语言翻译成<strong>最基本的与或非门的连接关系（网表），输出edf文件</strong>，导给PLD&#x2F;FPGA厂家的软件进行试配和布线。</p>
-</li>
-<li><p>，在进行复杂HDL设计时，基本上都会使用一些<strong>专业的逻辑综合软件</strong>，而不使用PLD&#x2F;FPGA厂家的集成开发软件中自带的逻辑综合功能。</p>
-</li>
-</ul>
 
             </div>
 
@@ -386,11 +379,11 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：VHDL第七章综合</li>
+        <li>本文标题：VHDL第八章可综合性</li>
         <li>本文作者：一语</li>
-        <li>创建时间：2023-02-17 00:57:48</li>
+        <li>创建时间：2023-02-18 10:17:49</li>
         <li>
-            本文链接：h-yy-bag.github.io/2023/02/17/VHDL第七章综合/
+            本文链接：h-yy-bag.github.io/2023/02/18/VHDL第八章可综合性/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -417,13 +410,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/02/18/VHDL%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%8F%AF%E7%BB%BC%E5%90%88%E6%80%A7/"
+                            href="/2023/02/18/VHDL%E7%AC%AC%E4%B9%9D%E7%AB%A0%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">VHDL第八章可综合性</span>
+                                    <span class="post-nav-title-item">VHDL第九章设计与优化</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -433,10 +426,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/02/16/VHDL%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BB%BF%E7%9C%9F/"
+                            href="/2023/02/17/VHDL%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%BB%BC%E5%90%88/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">VHDL第六章仿真</span>
+                                    <span class="post-nav-title-item">VHDL第七章综合</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -473,7 +466,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E7%9A%84%E5%B1%82%E6%AC%A1"><span class="nav-text">综合的层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E5%B1%82%E6%AC%A1%E7%BB%BC%E5%90%88"><span class="nav-text">高层次综合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88"><span class="nav-text">逻辑综合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-text">约束条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-%EF%BC%88%E5%A5%BD%E5%83%8F%E4%B8%8D%E5%A4%AA%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-text">属性 （好像不太重要）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93"><span class="nav-text">工艺库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RTL%E6%8F%8F%E8%BF%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">RTL描述代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88%E5%99%A8"><span class="nav-text">逻辑综合器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2"><span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E4%BC%98%E5%8C%96"><span class="nav-text">布尔优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E5%B9%B3%E8%AE%BE%E8%AE%A1"><span class="nav-text">展平设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%85%AC%E5%9B%A0%E6%95%B0"><span class="nav-text">提取公因数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%88%B0%E9%97%A8%E7%BA%A7"><span class="nav-text">映射到门级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDL%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6"><span class="nav-text">HDL逻辑综合软件</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VHDL-%E8%AF%AD%E8%A8%80%E7%BB%93%E6%9E%84%E5%90%91%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-text">VHDL 语言结构向硬件的映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VHDL%E7%B1%BB%E5%9E%8B"><span class="nav-text">VHDL类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VHDL%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-text">VHDL的对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%80%BC"><span class="nav-text">初值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E8%AF%AD%E5%8F%A5"><span class="nav-text">顺序语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AF%AD%E5%8F%A5"><span class="nav-text">并行语句</span></a></li></ol>
     </div>
 </div>
             </div>

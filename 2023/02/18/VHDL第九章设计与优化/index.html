@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    <meta name="description" content="Hexo Theme Redefine">
+    <meta name="author" content="一语">
+    
+    <title>
+        
+            VHDL第九章设计与优化 |
+        
+        Lady Shen
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/redefine-logo.svg">
+    
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/css/regular.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/css2.css">
+
+    <script id="hexo-configurations">
+    let REDEFINE = window.REDEFINE || {};
+    REDEFINE.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
+    REDEFINE.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#005080","avatar":"/images/redefine-avatar.svg","favicon":"/images/redefine-logo.svg","article_img_align":"left","right_side_width":"210px","content_max_width":"1000px","nav_color":{"left":"#f78736","right":"#367df7","transparency":35},"hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_image":{"light":"https://evan.beee.top/img/wallhaven-wqery6-light.webp","dark":"https://evan.beee.top/img/wallhaven-wqery6-dark.webp"},"title_color":{"light":"#fff","dark":"#d1d1b6"},"description":"Theme Redefine"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_block":{"copy":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"0.4.6","friend_links":{"columns":2}};
+    REDEFINE.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="My Lady Shen" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+    
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Lady Shen
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <!-- Menu -->
+                            <a class="" 
+                                href="/" >
+                                
+                                    
+                                        <i class="fa-regular fa-house"></i>
+                                    
+                                    首页
+                                
+                            </a>
+                            <!-- Submenu -->
+                            
+                        </li>
+                    
+                        <li class="menu-item">
+                            <!-- Menu -->
+                            <a class="" 
+                                href="/archives" >
+                                
+                                    
+                                        <i class="fa-regular fa-archive"></i>
+                                    
+                                    归档
+                                
+                            </a>
+                            <!-- Submenu -->
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="" 
+                       href="/" >
+                         
+                            
+                                <i class="fa-regular fa-house"></i>
+                            
+                            首页
+                        
+                    </a>
+                </li>
+                <!-- Submenu -->
+                
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="" 
+                       href="/archives" >
+                         
+                            
+                                <i class="fa-regular fa-archive"></i>
+                            
+                            归档
+                        
+                    </a>
+                </li>
+                <!-- Submenu -->
+                
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+            <div class="article-title">
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第九章设计与优化</h1></span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">一语</span>
+                            
+                                <span class="author-label">lol</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="pc">2023-02-18 10:18:11</span>
+        <span class="mobile">2023-02-18 10:18</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/VHDL-%E5%AD%A6%E4%B9%A0/">VHDL 学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <p>重要思想：<br>先设计模块电路后设计代码，设计者须<strong>明确每一段代码生成的电路</strong>，否则优化无从谈起。</p>
+<p>以设计全加器为例<br>逻辑函数：<br>          Si&#x3D;Ai⊕Bi⊕Ci-1<br>　　   Ci&#x3D;AiBi+Ci-1(Ai⊕Bi)</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">tmp &lt;= Ai  <span class="keyword">xor</span>  Bi ;</span><br><span class="line">Si    &lt;= tmp  <span class="keyword">xor</span>  Ci-<span class="number">1</span> ;</span><br><span class="line">Ci    &lt;= (Ai <span class="keyword">and</span> Bi) <span class="keyword">or</span> (Ci-<span class="number">1</span>  <span class="keyword">and</span>  tmp) ; </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171152480.png"
+                      alt="image.png"
+                ><br>当上述设计的全加器，若Ci和Si做同或运算<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171153582.png"
+                      alt="image.png"
+                ><br>波形<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171153202.png"
+                      alt="image.png"
+                ><br>存在竞争与冒险：<br>    Si&#x3D;Ai⊕Bi⊕Ci-1<br>   将：Ci&#x3D;AiBi+Ci-1(Ai⊕Bi)<br>   改为： Ci&#x3D;AiBi + BiCi-1 + AiCi-1</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Si &lt;= Ai <span class="keyword">xor</span> Bi  <span class="keyword">xor</span> Ci-<span class="number">1</span>；</span><br><span class="line">   Ci &lt;=（Ai <span class="keyword">and</span> Bi）<span class="keyword">or</span>（Bi <span class="keyword">and</span> Ci-<span class="number">1</span>）<span class="keyword">or</span>（Ai <span class="keyword">and</span> Ci-<span class="number">1</span>）；</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171154995.png"
+                      alt="image.png"
+                ></p>
+<p>严格来说，vhdl代码不是程序。VHDL既称为硬件描述语言，则VHDL主要用于设计描述硬线电路以及对设计的抽象仿真。那么，对于一个数字系统设计者来说，能够将所设计的代码映射为相应的硬线电路是必须具备的能力。</p>
+<h1 id="寄存器的引入方法"><a href="#寄存器的引入方法" class="headerlink" title="寄存器的引入方法"></a>寄存器的引入方法</h1><h2 id="触发器的引入"><a href="#触发器的引入" class="headerlink" title="触发器的引入"></a>触发器的引入</h2><p>两种引入方法：都是条件涵盖不完整的语句</p>
+<ul>
+<li><strong>条件涵盖不完整的if语句会产生触发器</strong></li>
+<li><strong>条件涵盖不完整的case语句会产生触发器</strong></li>
+</ul>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTITY</span> DFF <span class="keyword">IS</span></span><br><span class="line"><span class="keyword">PORT</span>(clk:<span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">            y:<span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">END</span> DFF;</span><br><span class="line"><span class="keyword">ARCHITECTURE</span> BEHAV <span class="keyword">OF</span> DFF <span class="keyword">IS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--------------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(clk)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">      <span class="keyword">IF</span> (clk’event <span class="keyword">AND</span> clk=‘<span class="number">1</span>’) <span class="keyword">THEN</span></span><br><span class="line">           y&lt;=a;</span><br><span class="line">      <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">---------------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(clk)</span><br><span class="line"> <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">IF</span> (rising_edge(clk)) <span class="keyword">THEN</span>    y&lt;=a;</span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">-- 此时的clk必须是std_logic类型</span></span><br><span class="line"><span class="comment">---------------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">      <span class="keyword">WAIT</span> <span class="keyword">UNTIL</span> clk’evnt ANDclk=‘<span class="number">1</span>’;</span><br><span class="line">      y&lt;=a;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">--： Wait语句必须放在进程的首部或尾部，并且一个进程中的wait语句不能超过一个</span></span><br><span class="line"><span class="comment">---------------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(clk)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">     <span class="keyword">IF</span> clk=‘<span class="number">1</span>’ <span class="keyword">THEN</span></span><br><span class="line">          y&lt;=a;</span><br><span class="line">     <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">-- 因为要启动进程必须要clk发生跳变，且仅当clk=‘1’时赋值才有效。所以综合后是一个D触发器 </span></span><br></pre></td></tr></table></figure></div>
+<p>上面的是使用条件涵盖不完整的if语句形成触发器，当if语句涵盖完整时，综合后形成一般的组合逻辑。</p>
+<ul>
+<li>当if 语句条件涵盖完整时，产生一个2选1的多路选择器。<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">PROCESS</span>( state, inA, inB)</span><br><span class="line">   <span class="keyword">BEGIN</span></span><br><span class="line">         <span class="keyword">CASE</span> state <span class="keyword">IS</span> </span><br><span class="line">               <span class="keyword">WHEN</span> s0 =&gt;</span><br><span class="line">                      outA&lt;=‘<span class="number">1</span>’; <span class="comment">--没有对outB赋值，所以outB保持原值</span></span><br><span class="line">               <span class="keyword">WHEN</span>  s1 =&gt;</span><br><span class="line">                      outA&lt;=inB ;    </span><br><span class="line">                      outB&lt;=‘<span class="number">1</span>’;</span><br><span class="line">               <span class="keyword">WHEN</span> s2 =&gt;</span><br><span class="line">                      outB&lt;=inA;    <span class="comment">--没有对outA赋值，所以outA保持原值</span></span><br><span class="line">         <span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="锁存器的引入"><a href="#锁存器的引入" class="headerlink" title="锁存器的引入"></a>锁存器的引入</h2><ul>
+<li>条件涵盖不完整的if语句会产生锁存器</li>
+<li>case语句中条件不完全覆盖会产生锁存器<br>实例：<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTITY</span> rigister <span class="keyword">IS</span></span><br><span class="line"> <span class="keyword">PORT</span>(a,clk:<span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">             y:<span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">END</span> DFF;</span><br><span class="line"><span class="keyword">ARCHITECTURE</span> BEHAV <span class="keyword">OF</span> rigister <span class="keyword">IS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="comment">----------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">PROCESS</span>(clk,a)</span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">     <span class="keyword">IF</span> clk=‘<span class="number">1</span>’ <span class="keyword">THEN</span></span><br><span class="line">     	y&lt;=a;</span><br><span class="line">     <span class="keyword">ELSE</span>             <span class="comment">--VHDL默认保持先前的值，故引入高电平锁存器</span></span><br><span class="line">     <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">-----------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(clk,a)</span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">IF</span> clk=‘<span class="number">1</span>’ <span class="keyword">THEN</span></span><br><span class="line">     	y&lt;=a;</span><br><span class="line">             <span class="comment">--省去了ELSE分支，表示分支y值不发生跳变，同样引入高电平锁存器</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"><span class="comment">-----------------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(clk,a)</span><br><span class="line">  <span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">IF</span> clk=‘<span class="number">0</span>’ <span class="keyword">THEN</span>        <span class="comment">--引入低电平锁存器</span></span><br><span class="line">     	y&lt;=a;</span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">IF</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<p>case语句</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTITY</span> rigister <span class="keyword">IS</span></span><br><span class="line">      <span class="keyword">PORT</span>(a,b:<span class="keyword">in</span> <span class="built_in">std_logic</span>;</span><br><span class="line">                 sel:<span class="keyword">in</span> <span class="built_in">std_logic_vector</span>(<span class="number">1</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line">                 y:<span class="keyword">out</span> <span class="built_in">std_logic</span>);</span><br><span class="line"><span class="keyword">END</span> DFF;</span><br><span class="line"><span class="keyword">ARCHITECTURE</span> BEHAV <span class="keyword">OF</span> rigister <span class="keyword">IS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="comment">------------------------------------</span></span><br><span class="line"><span class="keyword">PROCESS</span>(sel,a,b)</span><br><span class="line"> <span class="keyword">BEGIN</span></span><br><span class="line">   <span class="keyword">CASE</span>   sel   <span class="keyword">IS</span></span><br><span class="line">      <span class="keyword">WHEN</span>   “<span class="number">00</span>”   =&gt; y&lt;=a;</span><br><span class="line">      <span class="keyword">WHEN</span>    “<span class="number">01</span>”  =&gt; y&lt;=a;</span><br><span class="line">      <span class="keyword">WHEN</span>   <span class="keyword">OTHERS</span>  =&gt;  <span class="keyword">NULL</span>;</span><br><span class="line">   <span class="keyword">END</span> <span class="keyword">CASE</span>;</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">PROCESS</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<p>触发器和锁存器的区别<br>#值得一看<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171408469.png"
+                      alt="image.png"
+                ><br>process中启动条件<br>在触发器中只有clk<br>在锁存器中有 clk 和其他信号，持续的时间，仔细看图</p>
+<h2 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h2><p>例1</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171415459.png"
+                      alt="image.png"
+                ><br>在MAXPLUS中，一个进程中只能引入一个边沿检测的语句。<br>在QUARTUS中便不会有这种错误。</p>
+<hr>
+<p>例2<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171420276.png"
+                      alt="image.png"
+                ><br>将用于产生寄存器的信号或变量赋值语句放在了ELSE条件分支上。<br>       这种赋值方式<strong>相当于检测如果没有时钟信号，则赋新值</strong>。不可能有这样的硬件电路与之对应。</p>
+<p>例3<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171423805.png"
+                      alt="image.png"
+                ></p>
+<p>例4</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>  <span class="keyword">not</span> ( clock’event <span class="keyword">and</span> clock=‘<span class="number">1</span>’) <span class="keyword">then</span>   <span class="comment">--错误</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>原因：将边沿表达式当成了操作数</p>
+<h2 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h2><ul>
+<li>在引入寄存器时，一般情况下采用<strong>异步复位</strong>的方式</li>
+<li>寄存器中，复位的优先级一般要高于置位</li>
+<li>在引入时钟具有使能作用的寄存器时，宜采用嵌套的if语句来描述</li>
+<li>注意将时序进程和组合进程分开描述</li>
+</ul>
+<hr>
+<p><strong>具有时钟门控的触发器引入</strong>：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171429820.png"
+                      alt="image.png"
+                ><br>改为如下这种<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302171429255.png"
+                      alt="image.png"
+                ></p>
+<hr>
+<p>同步复位&#x2F;置位功能引入：</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">process</span>(clk)</span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line">    <span class="keyword">if</span>  clk’event <span class="keyword">and</span> clk=‘<span class="number">1</span>’ <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span>  set=‘<span class="number">1</span>’  <span class="keyword">then</span> </span><br><span class="line">             y&lt;=‘<span class="number">1</span>’;    </span><br><span class="line">             <span class="comment">--注意，输入‘1’（或true）才能引入硬件置位功能</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">             y&lt;=a <span class="keyword">and</span> b;</span><br><span class="line">        <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>上面这个为置1</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">process</span>(clk，reset，set)</span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line">     <span class="keyword">if</span> reset=‘<span class="number">1</span>’<span class="keyword">then</span></span><br><span class="line">           y&lt;=‘<span class="number">0</span>’;       <span class="comment">--必须是一个常量值0才能引入硬件复位机制</span></span><br><span class="line">      <span class="keyword">elsif</span>  set=‘<span class="number">1</span>’<span class="keyword">then</span> </span><br><span class="line">           y&lt;=‘<span class="number">1</span>’;       <span class="comment">--必须是一个常量值1才能引入硬件置位机制</span></span><br><span class="line">     <span class="keyword">elsif</span>  rising_edge(clk)  <span class="keyword">then</span></span><br><span class="line">           y&lt;=a <span class="keyword">and</span> b;</span><br><span class="line">     <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line"><span class="keyword">end</span> <span class="keyword">process</span>;</span><br></pre></td></tr></table></figure></div>
+<p>复位的<strong>优先级比置位高</strong>，这是符合常规硬件电路结构的。</p>
+<h1 id="避免不必要寄存器的引入"><a href="#避免不必要寄存器的引入" class="headerlink" title="避免不必要寄存器的引入"></a>避免不必要寄存器的引入</h1><p>由于综合在硬件电路中需要一定的空间，为了更快的工作，需要避免不必要的寄存器的引入<br>#值得一看 </p>
+<ol>
+<li>组合逻辑电路中不能存在<strong>边沿触发状态</strong></li>
+<li>IF 语句，CASE语句<strong>涵盖需要完整</strong>。</li>
+<li>如果信号或变量在一个CASE分支有赋值，就必须<strong>在每个分支都有赋值操作</strong>(或者在CASE语句前面有赋值)。</li>
+</ol>
+<p>实例：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172029074.png"
+                      alt="image.png"
+                ><br>1、在每个case分支都对outA和outB赋值；<br>2、在case语句前面，先对outA和outB赋初值；</p>
+<p>见课本p113-p117(《VHDL数字系统设计》徐向民主编)</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>基于3位二进制计数器的3个逻辑输出</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> ieee;</span><br><span class="line"><span class="keyword">use</span> ieee.std_logic_1164.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">use</span> ieee.std_logic_unsigned.<span class="keyword">all</span>;</span><br><span class="line"><span class="keyword">entity</span> exmp <span class="keyword">is</span></span><br><span class="line">    <span class="keyword">port</span> (  clock, reset : <span class="keyword">in</span> <span class="built_in">std_logic</span> ;</span><br><span class="line">               and_b, or_b, xor_b : <span class="keyword">out</span> <span class="built_in">std_logic</span>) ;</span><br><span class="line"><span class="keyword">end</span> exmp;</span><br><span class="line"><span class="keyword">architecture</span> rtl <span class="keyword">of</span> exmp <span class="keyword">is</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">      <span class="keyword">process</span></span><br><span class="line">         <span class="keyword">variable</span> count: <span class="built_in">std_logic_vector</span>(<span class="number">2</span> <span class="keyword">downto</span> <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">         <span class="keyword">wait</span> <span class="keyword">until</span> clock’event <span class="keyword">and</span> clock=‘<span class="number">1</span>’;</span><br><span class="line">          <span class="keyword">if</span>  reset=‘<span class="number">1</span>’ <span class="keyword">then</span> </span><br><span class="line">              count :=“<span class="number">000</span>”;</span><br><span class="line">          <span class="keyword">else</span> count :=count+<span class="number">1</span>;</span><br><span class="line">          <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">          and_b&lt;=count(<span class="number">2</span>) <span class="keyword">and</span> count(<span class="number">1</span>) <span class="keyword">and</span> count(<span class="number">0</span>);</span><br><span class="line">          or_b&lt;=count(<span class="number">2</span>) <span class="keyword">or</span> count(<span class="number">1</span>) <span class="keyword">or</span> count(<span class="number">0</span>);</span><br><span class="line">          xor_b&lt;=count(<span class="number">2</span>) <span class="keyword">xor</span> count(<span class="number">1</span>) <span class="keyword">xor</span> count(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"><span class="keyword">end</span> rtl;       </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>综合后的电路结构如图<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172032018.png"
+                      alt="image.png"
+                ></p>
+<p><strong>结果</strong>：引入了6个D触发器，但输出只依赖于count的计数。<br>由于count作为累加器，已具有存储功能，3个输出变量没有必要利用别的寄存器另加存储。上述例题的问题在于<strong>将3个输出赋值语句放在了同一个具有wait语句的进中</strong>。</p>
+<hr>
+<p><strong>改进</strong>：可将这3个输出赋值语句放在另外一个没有wait或if语句的进程中。使用两个进程，一个进程具有Wait语句，用于产生具有寄存器性质的计数器，另一个只作输出赋值用（<strong>双进程</strong>）<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172038406.png"
+                      alt="image.png"
+                ><br>综合后的电路结构：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172039899.png"
+                      alt="image.png"
+                ></p>
+<h1 id="设计与优化的重要概念"><a href="#设计与优化的重要概念" class="headerlink" title="设计与优化的重要概念"></a>设计与优化的重要概念</h1><p>（之前的内容也有涉及到：同步时序电路设计）<br>![[第五章 状态机设计#时钟周期的选取]]</p>
+<ol>
+<li><strong>建立时间</strong>：指在触发器的时钟信号上升沿到来以前，数据稳定不变的时间。如果 建立时间不够，数据将不能正确输入触发器。</li>
+<li><strong>保持时间</strong>：指在触发器的时钟信号上升沿到来以后，数据稳定不变的时间。如果 保持时间不够，数据同样不能正确输入触发器。 </li>
+<li><strong>传播时延</strong>：信号传播路径上所需要的时间<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172042700.png"
+                      alt="image.png"
+                ></li>
+<li>时钟偏差：一个时钟翻转的到达时间在空间上的差别通常称为时钟偏差。</li>
+<li>时钟抖动：指在芯片的某一个定点上时钟周期发生暂时的变化<br>影响：<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172045650.png"
+                      alt="image.png"
+                ></li>
+</ol>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172051625.png"
+                      alt="image.png"
+                ><br>初步设计：</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">pulse:<span class="keyword">process</span>(rst_n,pulse)</span><br><span class="line">	  <span class="keyword">begin</span></span><br><span class="line">		   <span class="keyword">if</span>(rst_n=‘<span class="number">0</span>’) <span class="keyword">then</span></span><br><span class="line">				 counter &lt;= (<span class="keyword">others</span>=&gt;’<span class="number">0</span>’);</span><br><span class="line">		   <span class="keyword">elsif</span>(pulse ‘event <span class="keyword">and</span> pulse = ‘<span class="number">1</span>’)</span><br><span class="line">				 counter &lt;= counter + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">	  <span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line">cs:<span class="keyword">process</span>(rst_n,cs_n)</span><br><span class="line">	  <span class="keyword">begin</span></span><br><span class="line">		  <span class="keyword">if</span>(rst_n=‘<span class="number">0</span>’) <span class="keyword">then</span></span><br><span class="line">				  dout &lt;= <span class="number">0</span>;</span><br><span class="line">		  <span class="keyword">elsif</span>(cs_n ‘event <span class="keyword">and</span> cs_n = ‘<span class="number">0</span>’)</span><br><span class="line">				   dout &lt;= counter;</span><br><span class="line">		  <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">   <span class="keyword">end</span> procss;</span><br><span class="line">			   </span><br><span class="line"><span class="comment">---- 不同步，当同时出现 一个上升，一个下降呢？</span></span><br></pre></td></tr></table></figure></div>
+<p>但是当脉冲信号PULSE和读片选信号CS_N是<strong>异步信号</strong>,PULSE何时出现上升沿和CS_N何时出现下降沿是不可控。<strong>若两者同时出现</strong>，结果并不唯一。</p>
+<p>How to solve?<br>使用<strong>跨时钟域的同步设计</strong>，将PULSE和CS_N同步于时钟。</p>
+<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">en1:<span class="keyword">process</span>(clk,rst_n,pulse)</span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span>(rst_n = ‘<span class="number">0</span>’) <span class="keyword">then</span></span><br><span class="line">		   preg1 &lt;= ‘<span class="number">1</span>’; preg2 &lt;= ‘<span class="number">1</span>’;</span><br><span class="line">		<span class="keyword">elsif</span>(clk ‘event <span class="keyword">and</span> clk=‘<span class="number">1</span>’)</span><br><span class="line">		   preg1 &lt;= pulse; preg2 &lt;= preg1;</span><br><span class="line">		<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">		pos_en &lt;= <span class="keyword">NOT</span> preg2 <span class="keyword">AND</span> preg1;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line">en1:<span class="keyword">process</span>(clk,rst_n,cs_n)</span><br><span class="line">   <span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span>(rst_n = ‘<span class="number">0</span>’) <span class="keyword">then</span></span><br><span class="line">		   preg1CS &lt;= ‘<span class="number">1</span>’; preg2CS&lt;= ‘<span class="number">1</span>’;</span><br><span class="line">		<span class="keyword">elsif</span>(clk ‘event <span class="keyword">and</span> clk=‘<span class="number">1</span>’)</span><br><span class="line">		   preg1CS &lt;=cs_n; preg2CS &lt;= preg1CS ;</span><br><span class="line">		<span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line">		PosCS_en &lt;= <span class="keyword">NOT</span> preg1CS <span class="keyword">AND</span> preg2CS;</span><br><span class="line">	<span class="keyword">end</span> <span class="keyword">process</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="跨时钟域信号处理"><a href="#跨时钟域信号处理" class="headerlink" title="跨时钟域信号处理"></a>跨时钟域信号处理</h1><p>如图：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172059156.png"
+                      alt="image.png"
+                ></p>
+<p>若不规范，将可能得到亚稳态数据。<br>What is it?<br>如果<strong>数据输入不满足建立时间和保持时间</strong>,那么触发器的晶体管就不能被可靠地设置成代表逻辑0或逻辑1的电压。不是确定在高或低电平就是被设到有效水平之前，晶体管就可能停留在一个中间电压，这就叫亚稳态。</p>
+<h2 id="如何进行跨时钟域的信号传输"><a href="#如何进行跨时钟域的信号传输" class="headerlink" title="如何进行跨时钟域的信号传输"></a>如何进行跨时钟域的信号传输</h2><ol>
+<li>同步寄存器链</li>
+<li>时钟同步设计</li>
+<li>专用握手信号</li>
+<li>借助存储器（FIFO结构）</li>
+<li>相位控制</li>
+<li>分割同步模块</li>
+</ol>
+<h3 id="专用握手信号"><a href="#专用握手信号" class="headerlink" title="专用握手信号"></a>专用握手信号</h3><p>（有点类似于三次握手，四次挥手）<br>使用专用控制信号进行状态指示，（req和ack）分别脉冲检测方法进行同步。<br>详细如下：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172111632.png"
+                      alt="image.png"
+                ></p>
+<p>优点： 可以接受到的数据稳定可靠，避免亚稳态<br>缺点： 消耗时间，不适合高速传输。</p>
+<h3 id="借助存储器（FIFO结构）"><a href="#借助存储器（FIFO结构）" class="headerlink" title="借助存储器（FIFO结构）"></a>借助存储器（FIFO结构）</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172113311.png"
+                      alt="image.png"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172113862.png"
+                      alt="image.png"
+                ></p>
+<p>重要参数：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172113361.png"
+                      alt="image.png"
+                ></p>
+<h3 id="相位控制"><a href="#相位控制" class="headerlink" title="相位控制"></a>相位控制</h3><p>如果其中至少一个时钟是在FPGA中内部通过PLL（锁相环）或DLL（延迟锁相环）可控制的，另一个时钟与在PLL或DLL解决方案中那个时钟周期有倍数关系，那么可采用相位匹配来消除冲突。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172114928.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172114121.png"
+                      alt="image.png"
+                ></p>
+<h3 id="分割同步模块"><a href="#分割同步模块" class="headerlink" title="分割同步模块"></a>分割同步模块</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172115014.png"
+                      alt="image.png"
+                ><br>每个基本模块的时序分析变为一致，因为它是完全同步。<br>时序在其应用到整个同步模块时很容易确定。</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：VHDL第九章设计与优化</li>
+        <li>本文作者：一语</li>
+        <li>创建时间：2023-02-18 10:18:11</li>
+        <li>
+            本文链接：h-yy-bag.github.io/2023/02/18/VHDL第九章设计与优化/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/VHDL-%E5%AD%A6%E4%B9%A0/">#VHDL 学习</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/02/18/VHDL%E7%AC%AC%E5%8D%81%E7%AB%A0%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">VHDL第十章数字系统设计方法</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/02/18/VHDL%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%8F%AF%E7%BB%BC%E5%90%88%E6%80%A7/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">VHDL第八章可综合性</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E5%BC%95%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-text">寄存器的引入方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-text">触发器的引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%AD%98%E5%99%A8%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-text">锁存器的引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">需要注意的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9"><span class="nav-text">注意的点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E4%B8%8D%E5%BF%85%E8%A6%81%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-text">避免不必要寄存器的引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-text">设计与优化的重要概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-text">习题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%A8%E6%97%B6%E9%92%9F%E5%9F%9F%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86"><span class="nav-text">跨时钟域信号处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B7%A8%E6%97%B6%E9%92%9F%E5%9F%9F%E7%9A%84%E4%BF%A1%E5%8F%B7%E4%BC%A0%E8%BE%93"><span class="nav-text">如何进行跨时钟域的信号传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E7%94%A8%E6%8F%A1%E6%89%8B%E4%BF%A1%E5%8F%B7"><span class="nav-text">专用握手信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%9F%E5%8A%A9%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%88FIFO%E7%BB%93%E6%9E%84%EF%BC%89"><span class="nav-text">借助存储器（FIFO结构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E4%BD%8D%E6%8E%A7%E5%88%B6"><span class="nav-text">相位控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E5%90%8C%E6%AD%A5%E6%A8%A1%E5%9D%97"><span class="nav-text">分割同步模块</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+
+
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;<i class="fa-solid fa-heart icon-animate"></i>&nbsp;<a href="/">一语. 版权所有.</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v0.4.6</a>
+        </div>
+        
+        
+        <script async data-pjax defer>
+            function odometer_init(){
+                    let el = document.getElementsByClassName('odometer');
+                    for (i = 0; i < el.length; i++) {
+                        od = new Odometer({
+                            el: el[i],
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    }
+            }
+            odometer_init();
+        </script>
+        <div id="start_time_div" style="display:none">
+            2022/8/17 11:45:14
+        </div>
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fa-solid fa-left-right"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fa-solid fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fa-solid fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fa-solid fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/runtime.js"></script>
+
+    
+<script src="/js/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/css/odometer-theme-minimal.css">
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/toc-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            REDEFINE.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            REDEFINE.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            REDEFINE.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

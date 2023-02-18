@@ -9,7 +9,7 @@
     
     <title>
         
-            VHDL第七章综合 |
+            VHDL第十章数字系统设计方法 |
         
         Lady Shen
     </title>
@@ -185,7 +185,7 @@
     <div class="post-page-container">
         <div class="article-content-container">
             <div class="article-title">
-                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第七章综合</h1></span>
+                <span class="title-hover-animation"><h1 style="font-size:2rem; font-weight: bold; margin: 10px 0;">VHDL第十章数字系统设计方法</h1></span>
             </div>
 
             
@@ -204,8 +204,8 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="pc">2023-02-17 00:57:48</span>
-        <span class="mobile">2023-02-17 00:57</span>
+        <span class="pc">2023-02-18 10:19:48</span>
+        <span class="mobile">2023-02-18 10:19</span>
     </span>
     
     
@@ -237,148 +237,161 @@
             
 
             <div class="article-content markdown-body">
-                <h1 id="综合的层次"><a href="#综合的层次" class="headerlink" title="综合的层次"></a>综合的层次</h1><p>针对一个给定的设计，根据设计应实现的功能与相应的约束条件，通过计算机的优化处理，获得一个满足要求的设计方案，这个过程就称为 <strong>综合</strong>。</p>
-<p>其中综合具有多个层次，从高到低可以分为</p>
+                <h1 id="数字系统的层次化结构"><a href="#数字系统的层次化结构" class="headerlink" title="数字系统的层次化结构"></a>数字系统的层次化结构</h1><p>可以分为四个层次：</p>
 <ol>
-<li>算法层</li>
-<li>寄存器传输层</li>
-<li>逻辑层</li>
-<li>电路层</li>
-<li>版图层</li>
+<li>性能级</li>
+<li>功能级</li>
+<li>结构级</li>
+<li>物理级</li>
 </ol>
-<p><strong>三个大的层次</strong>：<br>高层次综合、逻辑综合、版图综合<br><img  
+<ul>
+<li>系统设计：将<strong>性能级</strong>的说明映射为<strong>功能级</strong>的设计过程</li>
+<li>逻辑设计：将<strong>功能级</strong>的描述转换为<strong>结构（逻辑</strong>）的过程</li>
+<li>物理设计：将<strong>逻辑结构</strong>转换为<strong>物理级</strong>（电路）的实现<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170028496.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172207405.png"
+                      alt="image.png"
+                ><br>采用自顶向下的设计方法<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172210957.png"
+                      alt="image.png"
+                ></li>
+</ul>
+<h1 id="模块技术（系统设计）"><a href="#模块技术（系统设计）" class="headerlink" title="模块技术（系统设计）"></a>模块技术（系统设计）</h1><p>将系统总的功能分解为若干个子功能。划分系统的模块结构，需要考虑以下几个方面：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172342992.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172345986.png"
                       alt="image.png"
                 ></p>
-<h1 id="高层次综合"><a href="#高层次综合" class="headerlink" title="高层次综合"></a>高层次综合</h1><p>从<strong>算法级</strong>的行为描述到 <strong>寄存器传输级</strong>的描述<br>输入：硬件描述语言的源描述</p>
-<p>综合结果：一般包括一个 <strong>数据通路</strong>和一个<strong>控制器</strong>。</p>
-<ul>
-<li>数据通路（datapath）: 由寄存器、功能单元、多路器和总线等模块构成对的互连网络，实现数据的传输。</li>
-<li>控制器（controller）: 通常由硬连逻辑（hardwired logic）或固件（firmware）构成，用于控制数据通路中数据的传输。</li>
-</ul>
-<hr>
-<p><img  
+<h1 id="串行数据接收器"><a href="#串行数据接收器" class="headerlink" title="串行数据接收器"></a>串行数据接收器</h1><p>#值得一看<br><a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15G4y137AT" >对应的课程（点击跳转）<i class="fa-solid fa-up-right-from-square"></i></a></p>
+<p>性能级设计：<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170029337.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172352790.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302172353064.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180900306.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180902133.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180903086.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180903521.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180955991.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302180955831.png"
                       alt="image.png"
                 ></p>
-<p>作用：</p>
+<h1 id="迭代技术"><a href="#迭代技术" class="headerlink" title="迭代技术"></a>迭代技术</h1><p>简单的逻辑子网络代替复杂的组合逻辑网络，实现要求的处理功能。</p>
 <ul>
-<li>可以明显地提高设计速度，缩短设计周期，允许设计者寻求最优或满意的设计方案</li>
-<li>可以直接进行数字系统从行为描述到芯片描述的设计工作。 （）</li>
+<li>时间迭代</li>
+<li>空间迭代</li>
+<li>两者混合</li>
 </ul>
-<h1 id="逻辑综合"><a href="#逻辑综合" class="headerlink" title="逻辑综合"></a>逻辑综合</h1><p>高抽象层次的描述自动地转换成较低抽象层次描述的一种方法。<br>将RTL级的描述转换成<strong>门级网表</strong>的过程。<br>如图<br><img  
+<h2 id="空间迭代网络的基本模型"><a href="#空间迭代网络的基本模型" class="headerlink" title="空间迭代网络的基本模型"></a>空间迭代网络的基本模型</h2><p>结构高度重复的组合逻辑网络。利用结构相同的子网络作为单元电路。</p>
+<p><strong>单元电路的输入</strong>：</p>
+<ul>
+<li>来自外部的一次输入</li>
+<li>来自串接链路前级的二次输入<br><strong>单元电路的输出：</strong></li>
+<li>输出到外部的一次输出</li>
+<li>输出到串接链路次级的二次输出</li>
+</ul>
+<p><strong>二次输入和二次输出是建立子网络之间联系的纽带。</strong><br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170035073.png"
-                     
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181010791.png"
+                      alt="image.png"
                 ></p>
-<h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a><strong>约束条件</strong></h2><p>对于数字系统而言，芯片的面积和芯片的速度是综合时最主要考虑</p>
-<ol>
-<li><p>约束的表示：<br> 用于综合的约束可以用用户定义属性来表示。用户定义只是用于给综合工具传递约束信息，仿真时被忽略</p>
-<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">attribute</span>  属性名 ： 数据类型 ；</span><br><span class="line">    <span class="keyword">attribute</span>  属性名  <span class="keyword">of</span>  对象名 ：对象类型  <span class="keyword">is</span>  值</span><br><span class="line"><span class="comment">---------------------------------------</span></span><br><span class="line">	<span class="keyword">Type</span> state <span class="keyword">is</span> ( s0, s1, s2, s3 ); </span><br><span class="line">	<span class="keyword">Attribute</span> enum_encoding <span class="keyword">of</span> state : <span class="keyword">type</span> <span class="keyword">is</span> “<span class="number">00</span>  <span class="number">01</span> <span class="number">11</span> <span class="number">10</span>”; </span><br><span class="line"><span class="comment">--用于确定状态编码，用于有限状态机的描述中</span></span><br><span class="line"><span class="comment">-----------------------------------------</span></span><br><span class="line">	<span class="keyword">Attribute</span> pin_no :<span class="built_in">natural</span> ;</span><br><span class="line">	<span class="keyword">Attribute</span> pin_no <span class="keyword">of</span> q : <span class="keyword">signal</span> <span class="keyword">is</span> <span class="number">42</span> ;   </span><br><span class="line"><span class="comment">--为端口锁定芯片引脚</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-</li>
-<li><p>资源的约束</p>
-<div class="highlight-container" data-rel="Vhdl"><figure class="iseeu highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>   <span class="keyword">select</span>=‘<span class="number">1</span>’  <span class="keyword">then</span>  q&lt;=a+b;</span><br><span class="line">         <span class="keyword">else</span>  q&lt;=c+d;   </span><br><span class="line">     <span class="keyword">end</span> <span class="keyword">if</span> ;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-<p>可以用2个加法器和1个二路选择器实现<br>也可以用1个加法器和2个二路选择器完成。</p>
-</li>
-<li><p>时间的约束<br> 假定一个时序系统工作在20MHZ的时钟频率，那么通过状态寄存器和此态产生逻辑的最大延迟不能超过50ns（20MHZ的倒数）</p>
-</li>
+<h2 id="时间迭代网络的基本模型"><a href="#时间迭代网络的基本模型" class="headerlink" title="时间迭代网络的基本模型"></a>时间迭代网络的基本模型</h2><p>子网络在时钟控制下，接收来自信息寄存器A，．．．E通过移位的串行输入，在子网络内作串行处理后，串行输出到结果寄存器R1 ，…Rn  。<br>    暂存单元C用于寄存子网络的二次输出，以便在时钟的下一个节拍作为子网络的二次输入参加运算和操作。暂存单元C对应空间迭代方式中的边界输入。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181010235.png"
+                      alt="image.png"
+                ></p>
+<h1 id="4位二进制加法器迭代网络设计"><a href="#4位二进制加法器迭代网络设计" class="headerlink" title="4位二进制加法器迭代网络设计"></a>4位二进制加法器迭代网络设计</h1><p>分析：根据二进制数相加的运算规则可知，任意一位的和Si等于被加数<br>      Ai、Bi及来自低位的进位Ci－1，而其进位Ci则为相加后的溢出值。<br>实现1：根据这个结构特性，选用全加器FA作为子网络的单元电路，以低<br>       位向高位的进位值作为子网络的二次输入&#x2F;输出，通过空间迭代法构<br>       成的四位并行加法器如下图。通常最低位的进位输入Cin置为0，而<br>       最高位的Cout作为溢出标志。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181010910.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181010087.png"
+                      alt="image.png"
+                ><br>一个空间，一个时间迭代</p>
+<h2 id="二维迭代技术"><a href="#二维迭代技术" class="headerlink" title="二维迭代技术"></a>二维迭代技术</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181012098.png"
+                      alt="image.png"
+                ></p>
+<h1 id="乘法器设计"><a href="#乘法器设计" class="headerlink" title="乘法器设计"></a>乘法器设计</h1><ol>
+<li>性能级<br>四位数字乘法器</li>
+<li>结构级设计<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181013464.png"
+                      alt="image.png"
+                ></li>
 </ol>
-<hr>
-<h2 id="属性-（好像不太重要）"><a href="#属性-（好像不太重要）" class="headerlink" title="属性 （好像不太重要）"></a>属性 （好像不太重要）</h2><p>用于规定设计所进行的环境，如用属性规定对输出器件必须<strong>驱动的负载</strong>、驱动设计时器件的<strong>驱动能力</strong>和<strong>输入信号的时序</strong>等。</p>
-<ol>
-<li><p>负载属性<br> <img  
+<p>空间迭代：<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170044841.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181014166.png"
+                      alt="image.png"
+                ><br>时间迭代——部分积左移累加算法<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181014046.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181014703.png"
                       alt="image.png"
                 ></p>
-</li>
-<li><p>驱动属性<br>![[Pasted image 20230217004524.png]]</p>
-</li>
-<li><p>到达时间<br><img  
+<p>部分和右移与部分积累加算法<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170046430.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181015911.png"
                       alt="image.png"
                 ></p>
-</li>
-</ol>
-<h1 id="工艺库"><a href="#工艺库" class="headerlink" title="工艺库"></a>工艺库</h1><p><img  
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170047025.png"
-                      alt="image.png"
-                ><br>多数综合工具都有计算FPGA单元的十分完整的复杂延时模型，它包括固有的上升和下降时间、输出负载与输入级波形斜度延时和估计的引线延时，下图从门输入到输出的<strong>总延时</strong>是：</p>
-<p><u>固有延时＋负载延时＋引线延时＋输入级波形斜度延时</u><br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170047247.png"
+                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302181015217.png"
                       alt="image.png"
                 ></p>
-<h1 id="RTL描述代码"><a href="#RTL描述代码" class="headerlink" title="RTL描述代码"></a>RTL描述代码</h1><p>又被称为 <strong>数据流描述</strong><br>是一种明确规定寄存器描述的方法。即，是指以规定设计中采用的各种寄存器形式为特征，然后在寄存器之间插入组合逻辑。<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170048738.png"
-                      alt="image.png"
-                ></p>
-<h1 id="逻辑综合器"><a href="#逻辑综合器" class="headerlink" title="逻辑综合器"></a>逻辑综合器</h1><p>从 RTL 转换到 门级描述 有3个步骤：</p>
-<ul>
-<li>把RTL描述转换为未优化的<strong>门级布尔</strong>描述；</li>
-<li>执行布尔优化算法，产生一个优化的<strong>布尔方程描述；</strong></li>
-<li>按目的工艺要求，采用相应的工艺库把优化的布尔等式描述<strong>映射</strong>到<strong>实际逻辑门</strong>。</li>
-</ul>
-<h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><ul>
-<li><p>从RTL描述转换到布尔等式描述通<strong>常并不是由用户控制的</strong>，所产生的中介形式一般为特定优化工具的格式，甚至是不可能由用户可视的。</p>
-</li>
-<li><p>按照这种中介描述，ALL  IF、CASE、LOOP语句、条件信号赋值和选择信号赋值语句转换到它们的布尔表达式，或者<strong>由装配组成触发器和锁存器</strong>,或者由<strong>推论去生成触发器和锁存器。</strong></p>
-</li>
-<li><p>按照其中介的描述这两种情况都能<strong>产生同样的触发器和锁存器</strong></p>
-</li>
-</ul>
-<h1 id="布尔优化"><a href="#布尔优化" class="headerlink" title="布尔优化"></a>布尔优化</h1><ul>
-<li><p>优化过程用大量的算法和规则把一个非优化的布尔的描述转化到优化的布尔描述。</p>
-</li>
-<li><p>转换非优化布尔描述到最低级描述，然后优化那种描述，并尝试用（引入中间变量）共享公共项去减少逻辑门。</p>
-</li>
-<li><p>包括展平设计和提取公因数</p>
-</li>
-</ul>
-<h2 id="展平设计"><a href="#展平设计" class="headerlink" title="展平设计"></a>展平设计</h2><p>转换非优化布尔描述到一种pla格式的过程称为展平设计，即它将所有的逻辑关系都转换成简单的AND和OR的表达式。</p>
-<p>目的：使非优化的布尔描述格式转换成能执行优化算法的布尔描述格式。<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170054716.png"
-                      alt="image.png"
-                ></p>
-<h2 id="提取公因数"><a href="#提取公因数" class="headerlink" title="提取公因数"></a>提取公因数</h2><p>提取公因数是把附加的中间项加到结构描述中的一种过程。展平设计通常会使设计变得非常之大，而且要产生大扇出，展平过程可能比提取公因数的设计在速度上要慢得多<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170054082.png"
-                      alt="image.png"
-                ></p>
-<h1 id="映射到门级"><a href="#映射到门级" class="headerlink" title="映射到门级"></a>映射到门级</h1><ul>
-<li><p>映射过程取出由优化后的布尔描述并利用从工艺库得到的逻辑和定时信息<strong>生成网表</strong>。</p>
-</li>
-<li><p>网表是对用户所需面积和速度目标的体现，有大量的网表，它们在功能上相同但在速度和面积上都在一个很宽的范围上可变</p>
-</li>
-</ul>
-<p>示例：<br><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/h-yy-bag/hexo_imgs/202302170056884.png"
-                      alt="image.png"
-                ></p>
-<h1 id="HDL逻辑综合软件"><a href="#HDL逻辑综合软件" class="headerlink" title="HDL逻辑综合软件"></a>HDL逻辑综合软件</h1><ul>
-<li><p>这类软件将把HDL语言翻译成<strong>最基本的与或非门的连接关系（网表），输出edf文件</strong>，导给PLD&#x2F;FPGA厂家的软件进行试配和布线。</p>
-</li>
-<li><p>，在进行复杂HDL设计时，基本上都会使用一些<strong>专业的逻辑综合软件</strong>，而不使用PLD&#x2F;FPGA厂家的集成开发软件中自带的逻辑综合功能。</p>
-</li>
-</ul>
 
             </div>
 
@@ -386,11 +399,11 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：VHDL第七章综合</li>
+        <li>本文标题：VHDL第十章数字系统设计方法</li>
         <li>本文作者：一语</li>
-        <li>创建时间：2023-02-17 00:57:48</li>
+        <li>创建时间：2023-02-18 10:19:48</li>
         <li>
-            本文链接：h-yy-bag.github.io/2023/02/17/VHDL第七章综合/
+            本文链接：h-yy-bag.github.io/2023/02/18/VHDL第十章数字系统设计方法/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -414,29 +427,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/02/18/VHDL%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%8F%AF%E7%BB%BC%E5%90%88%E6%80%A7/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">VHDL第八章可综合性</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/02/16/VHDL%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%BB%BF%E7%9C%9F/"
+                            href="/2023/02/18/VHDL%E7%AC%AC%E4%B9%9D%E7%AB%A0%E8%AE%BE%E8%AE%A1%E4%B8%8E%E4%BC%98%E5%8C%96/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">VHDL第六章仿真</span>
+                                    <span class="post-nav-title-item">VHDL第九章设计与优化</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -473,7 +471,7 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div style="font-size: 1.3rem;margin-top: 0; margin-bottom: 0.8rem; transition-duration: 0.1s;"><i class="fa-solid fa-list"></i> <strong>目录</strong></div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E7%9A%84%E5%B1%82%E6%AC%A1"><span class="nav-text">综合的层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AB%98%E5%B1%82%E6%AC%A1%E7%BB%BC%E5%90%88"><span class="nav-text">高层次综合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88"><span class="nav-text">逻辑综合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-text">约束条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7-%EF%BC%88%E5%A5%BD%E5%83%8F%E4%B8%8D%E5%A4%AA%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-text">属性 （好像不太重要）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E8%89%BA%E5%BA%93"><span class="nav-text">工艺库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RTL%E6%8F%8F%E8%BF%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">RTL描述代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88%E5%99%A8"><span class="nav-text">逻辑综合器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2"><span class="nav-text">转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E4%BC%98%E5%8C%96"><span class="nav-text">布尔优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E5%B9%B3%E8%AE%BE%E8%AE%A1"><span class="nav-text">展平设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%85%AC%E5%9B%A0%E6%95%B0"><span class="nav-text">提取公因数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%88%B0%E9%97%A8%E7%BA%A7"><span class="nav-text">映射到门级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDL%E9%80%BB%E8%BE%91%E7%BB%BC%E5%90%88%E8%BD%AF%E4%BB%B6"><span class="nav-text">HDL逻辑综合软件</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E5%8C%96%E7%BB%93%E6%9E%84"><span class="nav-text">数字系统的层次化结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E6%8A%80%E6%9C%AF%EF%BC%88%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="nav-text">模块技术（系统设计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E8%A1%8C%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%99%A8"><span class="nav-text">串行数据接收器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-text">迭代技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E8%BF%AD%E4%BB%A3%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-text">空间迭代网络的基本模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%BF%AD%E4%BB%A3%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-text">时间迭代网络的基本模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E4%BD%8D%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8A%A0%E6%B3%95%E5%99%A8%E8%BF%AD%E4%BB%A3%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1"><span class="nav-text">4位二进制加法器迭代网络设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E8%BF%AD%E4%BB%A3%E6%8A%80%E6%9C%AF"><span class="nav-text">二维迭代技术</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="nav-text">乘法器设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol>
     </div>
 </div>
             </div>
